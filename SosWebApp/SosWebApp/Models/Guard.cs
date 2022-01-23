@@ -29,6 +29,7 @@ namespace SosWebApp.Models
 
         public Ambulance Ambulance { get; set; }
 
+        public ICollection<Service> Services { get; set; }
 
     }
 }
