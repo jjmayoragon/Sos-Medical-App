@@ -19,5 +19,8 @@ namespace SosWebApp.Models
         [StringLength(10)]
         [Display(Name = "DNI")]
         public string DNI { get; set; }
+
+        public Guard Guard { get; set; }
+
     }
 }

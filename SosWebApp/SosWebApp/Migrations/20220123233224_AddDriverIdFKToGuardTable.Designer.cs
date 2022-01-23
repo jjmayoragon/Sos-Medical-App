@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SosWebApp.Data;
 
 namespace SosWebApp.Migrations
 {
     [DbContext(typeof(ContextoBD))]
-    partial class ContextoBDModelSnapshot : ModelSnapshot
+    [Migration("20220123233224_AddDriverIdFKToGuardTable")]
+    partial class AddDriverIdFKToGuardTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,9 +103,6 @@ namespace SosWebApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AmbulanceId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
@@ -117,10 +116,6 @@ namespace SosWebApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AmbulanceId")
-                        .IsUnique()
-                        .HasFilter("[AmbulanceId] IS NOT NULL");
 
                     b.HasIndex("DoctorId")
                         .IsUnique()
@@ -176,10 +171,6 @@ namespace SosWebApp.Migrations
 
             modelBuilder.Entity("SosWebApp.Models.Guard", b =>
                 {
-                    b.HasOne("SosWebApp.Models.Ambulance", "Ambulance")
-                        .WithOne("Guard")
-                        .HasForeignKey("SosWebApp.Models.Guard", "AmbulanceId");
-
                     b.HasOne("SosWebApp.Models.Doctor", "Doctor")
                         .WithOne("Guard")
                         .HasForeignKey("SosWebApp.Models.Guard", "DoctorId");
@@ -188,16 +179,9 @@ namespace SosWebApp.Migrations
                         .WithOne("Guard")
                         .HasForeignKey("SosWebApp.Models.Guard", "DriverId");
 
-                    b.Navigation("Ambulance");
-
                     b.Navigation("Doctor");
 
                     b.Navigation("Driver");
-                });
-
-            modelBuilder.Entity("SosWebApp.Models.Ambulance", b =>
-                {
-                    b.Navigation("Guard");
                 });
 
             modelBuilder.Entity("SosWebApp.Models.Doctor", b =>

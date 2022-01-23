@@ -17,5 +17,18 @@ namespace SosWebApp.Models
         [DataType(DataType.DateTime)]
         public DateTime? Finish { get; set; }
 
+        public int? DoctorId { get; set; }
+
+        public Doctor Doctor { get; set; }
+
+        public int? DriverId { get; set; }
+
+        public Driver Driver { get; set; }
+
+        public int? AmbulanceId { get; set; }
+
+        public Ambulance Ambulance { get; set; }
+
+
     }
 }
