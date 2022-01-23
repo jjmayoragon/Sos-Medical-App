@@ -13,6 +13,7 @@ namespace SosWebApp.Data
         public DbSet<Ambulance> Ambulances { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Guard> Guards { get; set; }
 
         public ContextoBD(DbContextOptions<ContextoBD> options) : base(options) { }
         
