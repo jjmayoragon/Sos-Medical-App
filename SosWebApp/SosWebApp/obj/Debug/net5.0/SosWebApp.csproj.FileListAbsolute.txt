@@ -443,3 +443,8 @@ D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views
 D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Driver\Details.cshtml.g.cs
 D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Driver\Edit.cshtml.g.cs
 D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Driver\Index.cshtml.g.cs
+D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Service\Create.cshtml.g.cs
+D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Service\Delete.cshtml.g.cs
+D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Service\Details.cshtml.g.cs
+D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Service\Edit.cshtml.g.cs
+D:\REPOS\SOSMEDICA_ASPNET5_2019\SosWebApp\SosWebApp\obj\Debug\net5.0\Razor\Views\Service\Index.cshtml.g.cs
