@@ -22,5 +22,8 @@ namespace SosWebApp.Models
 
         public double TarifaRegular { get; set; }
 
+        public Service Service { get; set; }
+
+
     }
 }

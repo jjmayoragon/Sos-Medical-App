@@ -44,7 +44,13 @@ namespace SosWebApp.Models
         [Display(Name = "Código")]
         public string ColorCodigo { get; set; }
 
-        
+        [Display(Name = "Coseguro")]
+        public double? Coseguro { get; set; }
+
+        public int? TriageCodeId { get; set; }
+
+        public TriageCode TriageCode { get; set; }
+
 
     }
 }

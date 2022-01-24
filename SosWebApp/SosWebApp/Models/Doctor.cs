@@ -26,5 +26,6 @@ namespace SosWebApp.Models
 
         public Guard Guard { get; set; }
 
+
     }
 }
