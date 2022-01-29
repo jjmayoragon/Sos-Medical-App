@@ -48,11 +48,29 @@
             @Html.DisplayFor(model => model.Obs)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ColorCodigo)
+            @Html.DisplayNameFor(model => model.TriageCode)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ColorCodigo)
+            @Html.DisplayFor(model => model.TriageCode.Name)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Coseguro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Coseguro)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPlus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsPlus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Guard)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Guard.Name)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

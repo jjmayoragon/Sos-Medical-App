@@ -20,9 +20,10 @@ namespace SosWebApp.Models
         [Display(Name = "Denominación legal")]
         public string LegalName { get; set; }
 
+        [Display(Name = "Tarifa Regular")]
         public double TarifaRegular { get; set; }
 
-        public Service Service { get; set; }
+        
 
 
     }

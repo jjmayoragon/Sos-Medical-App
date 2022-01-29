@@ -20,7 +20,7 @@ namespace SosWebApp.Models
         [Display(Name = "DNI")]
         public string DNI { get; set; }
 
-        public Guard Guard { get; set; }
+        
 
     }
 }

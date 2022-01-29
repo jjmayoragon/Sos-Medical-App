@@ -22,7 +22,8 @@ namespace SosWebApp.Controllers
         // GET: Guard
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Guards.ToListAsync());
+            var contextoBD = _context.Guards.Include(g => g.Ambulance).Include(g => g.Doctor).Include(g => g.Driver);
+            return View(await contextoBD.ToListAsync());
         }
 
         // GET: Guard/Details/5
@@ -34,6 +35,9 @@ namespace SosWebApp.Controllers
             }
 
             var guard = await _context.Guards
+                .Include(g => g.Ambulance)
+                .Include(g => g.Doctor)
+                .Include(g => g.Driver)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (guard == null)
             {
@@ -46,6 +50,9 @@ namespace SosWebApp.Controllers
         // GET: Guard/Create
         public IActionResult Create()
         {
+            ViewData["AmbulanceId"] = new SelectList(_context.Ambulances, "Id", "Name");
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name");
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "Name");
             return View();
         }
 
@@ -54,7 +61,7 @@ namespace SosWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Start,Finish")] Guard guard)
+        public async Task<IActionResult> Create([Bind("Id,Name,Start,Finish,DoctorId,DriverId,AmbulanceId")] Guard guard)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +69,9 @@ namespace SosWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AmbulanceId"] = new SelectList(_context.Ambulances, "Id", "Name", guard.AmbulanceId);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", guard.DoctorId);
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "Name", guard.DriverId);
             return View(guard);
         }
 
@@ -78,6 +88,9 @@ namespace SosWebApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["AmbulanceId"] = new SelectList(_context.Ambulances, "Id", "Name", guard.AmbulanceId);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", guard.DoctorId);
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "Name", guard.DriverId);
             return View(guard);
         }
 
@@ -86,7 +99,7 @@ namespace SosWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Start,Finish")] Guard guard)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Start,Finish,DoctorId,DriverId,AmbulanceId")] Guard guard)
         {
             if (id != guard.Id)
             {
@@ -113,6 +126,9 @@ namespace SosWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AmbulanceId"] = new SelectList(_context.Ambulances, "Id", "Name", guard.AmbulanceId);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", guard.DoctorId);
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "Name", guard.DriverId);
             return View(guard);
         }
 
@@ -125,6 +141,9 @@ namespace SosWebApp.Controllers
             }
 
             var guard = await _context.Guards
+                .Include(g => g.Ambulance)
+                .Include(g => g.Doctor)
+                .Include(g => g.Driver)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (guard == null)
             {

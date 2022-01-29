@@ -24,7 +24,7 @@ namespace SosWebApp.Models
         [Display(Name = "Matrícula")]
         public string MAT { get; set; }
 
-        public Guard Guard { get; set; }
+        
 
 
     }

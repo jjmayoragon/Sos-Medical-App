@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Start" class="control-label"></label>
                 <input asp-for="Start" class="form-control" />
                 <span asp-validation-for="Start" class="text-danger"></span>
@@ -22,6 +27,21 @@
                 <label asp-for="Finish" class="control-label"></label>
                 <input asp-for="Finish" class="form-control" />
                 <span asp-validation-for="Finish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.DoctorId"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriverId" class="control-label"></label>
+                <select asp-for="DriverId" class="form-control" asp-items="ViewBag.DriverId"></select>
+                <span asp-validation-for="DriverId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmbulanceId" class="control-label"></label>
+                <select asp-for="AmbulanceId" class="form-control" asp-items="ViewBag.AmbulanceId"></select>
+                <span asp-validation-for="AmbulanceId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

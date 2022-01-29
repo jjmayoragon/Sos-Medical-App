@@ -31,7 +31,16 @@
                 @Html.DisplayNameFor(model => model.Obs)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ColorCodigo)
+                @Html.DisplayNameFor(model => model.TriageCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coseguro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPlus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guard)
             </th>
             <th></th>
         </tr>
@@ -58,7 +67,16 @@
                 @Html.DisplayFor(modelItem => item.Obs)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ColorCodigo)
+                @Html.DisplayFor(modelItem => item.TriageCode.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coseguro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPlus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guard.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

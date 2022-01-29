@@ -113,22 +113,21 @@ namespace SosWebApp.Migrations
                     b.Property<DateTime?>("Finish")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<DateTime?>("Start")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AmbulanceId")
-                        .IsUnique()
-                        .HasFilter("[AmbulanceId] IS NOT NULL");
+                    b.HasIndex("AmbulanceId");
 
-                    b.HasIndex("DoctorId")
-                        .IsUnique()
-                        .HasFilter("[DoctorId] IS NOT NULL");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("DriverId")
-                        .IsUnique()
-                        .HasFilter("[DriverId] IS NOT NULL");
+                    b.HasIndex("DriverId");
 
                     b.ToTable("Guards");
                 });
@@ -139,10 +138,6 @@ namespace SosWebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ColorCodigo")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
 
                     b.Property<double?>("Coseguro")
                         .HasColumnType("float");
@@ -155,11 +150,14 @@ namespace SosWebApp.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GuardId")
+                    b.Property<int>("GuardId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Hora")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPlus")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NroIncidente")
                         .IsRequired()
@@ -182,9 +180,7 @@ namespace SosWebApp.Migrations
 
                     b.HasIndex("GuardId");
 
-                    b.HasIndex("TriageCodeId")
-                        .IsUnique()
-                        .HasFilter("[TriageCodeId] IS NOT NULL");
+                    b.HasIndex("TriageCodeId");
 
                     b.ToTable("Services");
                 });
@@ -216,16 +212,16 @@ namespace SosWebApp.Migrations
             modelBuilder.Entity("SosWebApp.Models.Guard", b =>
                 {
                     b.HasOne("SosWebApp.Models.Ambulance", "Ambulance")
-                        .WithOne("Guard")
-                        .HasForeignKey("SosWebApp.Models.Guard", "AmbulanceId");
+                        .WithMany()
+                        .HasForeignKey("AmbulanceId");
 
                     b.HasOne("SosWebApp.Models.Doctor", "Doctor")
-                        .WithOne("Guard")
-                        .HasForeignKey("SosWebApp.Models.Guard", "DoctorId");
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("SosWebApp.Models.Driver", "Driver")
-                        .WithOne("Guard")
-                        .HasForeignKey("SosWebApp.Models.Guard", "DriverId");
+                        .WithMany()
+                        .HasForeignKey("DriverId");
 
                     b.Navigation("Ambulance");
 
@@ -236,40 +232,24 @@ namespace SosWebApp.Migrations
 
             modelBuilder.Entity("SosWebApp.Models.Service", b =>
                 {
-                    b.HasOne("SosWebApp.Models.Guard", null)
+                    b.HasOne("SosWebApp.Models.Guard", "Guard")
                         .WithMany("Services")
-                        .HasForeignKey("GuardId");
+                        .HasForeignKey("GuardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SosWebApp.Models.TriageCode", "TriageCode")
-                        .WithOne("Service")
-                        .HasForeignKey("SosWebApp.Models.Service", "TriageCodeId");
+                        .WithMany()
+                        .HasForeignKey("TriageCodeId");
+
+                    b.Navigation("Guard");
 
                     b.Navigation("TriageCode");
-                });
-
-            modelBuilder.Entity("SosWebApp.Models.Ambulance", b =>
-                {
-                    b.Navigation("Guard");
-                });
-
-            modelBuilder.Entity("SosWebApp.Models.Doctor", b =>
-                {
-                    b.Navigation("Guard");
-                });
-
-            modelBuilder.Entity("SosWebApp.Models.Driver", b =>
-                {
-                    b.Navigation("Guard");
                 });
 
             modelBuilder.Entity("SosWebApp.Models.Guard", b =>
                 {
                     b.Navigation("Services");
-                });
-
-            modelBuilder.Entity("SosWebApp.Models.TriageCode", b =>
-                {
-                    b.Navigation("Service");
                 });
 #pragma warning restore 612, 618
         }

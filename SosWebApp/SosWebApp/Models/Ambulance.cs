@@ -28,7 +28,7 @@ namespace SosWebApp.Models
         [Display(Name = "Marca y modelo")]
         public string Description { get; set; }
 
-        public Guard Guard { get; set; }
+        
 
     }
 }

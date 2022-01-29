@@ -40,17 +40,20 @@ namespace SosWebApp.Models
         [Display(Name = "Observaciones")]
         public string Obs { get; set; }
 
-        [StringLength(255)]
         [Display(Name = "Código")]
-        public string ColorCodigo { get; set; }
+        public int? TriageCodeId { get; set; }
+        public TriageCode TriageCode { get; set; }
 
         [Display(Name = "Coseguro")]
         public double? Coseguro { get; set; }
 
-        public int? TriageCodeId { get; set; }
+        [Display(Name = "Horario nocturno")]
+        public bool IsPlus { get; set; }
 
-        public TriageCode TriageCode { get; set; }
+        [Display(Name = "Identificador guardia")]
+        public int GuardId { get; set; }
 
+        public Guard Guard { get; set; }
 
     }
 }

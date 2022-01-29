@@ -22,7 +22,8 @@ namespace SosWebApp.Controllers
         // GET: Service
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Services.ToListAsync());
+            var contextoBD = _context.Services.Include(s => s.Guard).Include(s => s.TriageCode);
+            return View(await contextoBD.ToListAsync());
         }
 
         // GET: Service/Details/5
@@ -34,6 +35,8 @@ namespace SosWebApp.Controllers
             }
 
             var service = await _context.Services
+                .Include(s => s.Guard)
+                .Include(s => s.TriageCode)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (service == null)
             {
@@ -46,6 +49,8 @@ namespace SosWebApp.Controllers
         // GET: Service/Create
         public IActionResult Create()
         {
+            ViewData["GuardId"] = new SelectList(_context.Guards, "Id", "Name");
+            ViewData["TriageCodeId"] = new SelectList(_context.TriageCodes, "Id", "Name");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace SosWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NroIncidente,Fecha,Hora,Paciente,Dx,Obs,ColorCodigo")] Service service)
+        public async Task<IActionResult> Create([Bind("Id,NroIncidente,Fecha,Hora,Paciente,Dx,Obs,TriageCodeId,Coseguro,IsPlus,GuardId")] Service service)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace SosWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuardId"] = new SelectList(_context.Guards, "Id", "Name", service.GuardId);
+            ViewData["TriageCodeId"] = new SelectList(_context.TriageCodes, "Id", "Name", service.TriageCodeId);
             return View(service);
         }
 
@@ -78,6 +85,8 @@ namespace SosWebApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["GuardId"] = new SelectList(_context.Guards, "Id", "Name", service.GuardId);
+            ViewData["TriageCodeId"] = new SelectList(_context.TriageCodes, "Id", "Name", service.TriageCodeId);
             return View(service);
         }
 
@@ -86,7 +95,7 @@ namespace SosWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NroIncidente,Fecha,Hora,Paciente,Dx,Obs,ColorCodigo")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NroIncidente,Fecha,Hora,Paciente,Dx,Obs,TriageCodeId,Coseguro,IsPlus,GuardId")] Service service)
         {
             if (id != service.Id)
             {
@@ -113,6 +122,8 @@ namespace SosWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GuardId"] = new SelectList(_context.Guards, "Id", "Name", service.GuardId);
+            ViewData["TriageCodeId"] = new SelectList(_context.TriageCodes, "Id", "Name", service.TriageCodeId);
             return View(service);
         }
 
@@ -125,6 +136,8 @@ namespace SosWebApp.Controllers
             }
 
             var service = await _context.Services
+                .Include(s => s.Guard)
+                .Include(s => s.TriageCode)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (service == null)
             {
